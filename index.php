@@ -30,7 +30,7 @@ mysqli_close($conn);
 // Organizar os dados em uma matriz bidimensional, com dias nas linhas e horas nas colunas
 $data = array();
 while ($row = $result->fetch_assoc()) {
-    $dia = date('Y-m-d', strtotime($row['dia']));
+    $dia = date('d-m-Y', strtotime($row['dia']));
     $hora = $row['hora'];
     $nome = $row['nome'];
     $data[$dia][$hora] = $nome;
