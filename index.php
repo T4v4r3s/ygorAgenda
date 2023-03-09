@@ -60,6 +60,7 @@ for ($hora = 0; $hora < 24; $hora++) {
 echo '</tr>';
 echo '</thead>';
 echo '<tbody>';
+ksort($data);
 foreach ($data as $dia => $horas) {
     echo '<tr>';
     echo '<th>' . $dia . '</th>';
