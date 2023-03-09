@@ -2,6 +2,16 @@
 
 include_once 'conexaodb.php';
 
+echo '<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Minha página</title>
+    <link rel="stylesheet" href="style.css">
+  </head>';
+
+echo '<body>';
+
 // Cria o formulário para adicionar nomes
 echo "<form method='post' action = 'criacaodb.php'>";
 echo "<label>Data:</label><input type='date' name='dia'><br>";
@@ -47,4 +57,6 @@ foreach ($data as $dia => $horas) {
 }
 echo '</tbody>';
 echo '</table>';
+echo '</body>';
+echo '</html>';
 ?>
