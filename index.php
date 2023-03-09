@@ -5,7 +5,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-include 'conexaodb.php';
+include_once 'conexaodb.php';
 
 // Busca os dados na tabela
 $sql = "SELECT * FROM wr1";

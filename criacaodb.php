@@ -1,7 +1,7 @@
 <?php
 // Adiciona o nome na tabela se o formulário foi enviado
 
-include 'conexaodb.php';
+include_once 'conexaodb.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = $_POST["data"];
