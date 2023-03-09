@@ -2,50 +2,47 @@
 
 include_once 'conexaodb.php';
 
+// Cria o formulário para adicionar nomes
+echo "<form method='post' action = 'criacaodb.php'>";
+echo "<label>Data:</label><input type='date' name='dia'><br>";
+echo "<label>Hora de Início:</label><input type='number' name='hora_inicio' min='0' max='23'><br>";
+echo "<label>Duração (em horas):</label><input type='number' name='duracao' min='1' max='8'><br>";
+echo "<label>Nome:</label><input type='text' name='nome'><br>";
+echo "<input type='submit' value='Adicionar'>";
+echo "</form>";
+
 // Busca os dados na tabela
 $sql = "SELECT * FROM wr1";
 $result = mysqli_query($conn, $sql);
 
 mysqli_close($conn);
 
-// Cria a tabela HTML
-echo "<table>";
-echo "<tr><th></th>"; // Cabeçalho vazio para a primeira célula
-for ($i=0; $i<24; $i++) {
-    echo "<th>" . str_pad($i, 2, "0", STR_PAD_LEFT) . ":00</th>";
-}
-echo "</tr>";
-while($row = mysqli_fetch_assoc($result)) {
-    $data = date("d/m", strtotime($row["data"]));
-    $hora = date("H", strtotime($row["hora"]));
-    $nome = $row["nome"];
+// Criar um array para armazenar os eventos da agenda
+$eventos = array();
 
-    // Cria a célula
-    if (!isset($table[$data])) {
-        $table[$data] = array();
-    }
-    $table[$data][$hora] = $nome;
+// Iterar sobre o resultado e criar objetos para os eventos
+while ($row = $result->fetch_assoc()) {
+    $nome = $row['nome'];
+    $hora = $row['hora'];
+    $dia = new DateTime($row['dia']);
+    $evento = array(
+        'nome' => $nome,
+        'hora' => $hora,
+        'dia' => $dia
+    );
+    $eventos[] = $evento;
 }
 
-// Cria as células para cada data e hora
-foreach ($table as $data => $horas) {
-    echo "<tr><th>$data</th>";
-    for ($i=0; $i<24; $i++) {
-        $hora = str_pad($i, 2, "0", STR_PAD_LEFT);
-        $nome = isset($horas[$hora]) ? $horas[$hora] : "";
-        echo "<td>$nome</td>";
-    }
-    echo "</tr>";
+// Exibir a agenda na página da web
+echo '<h1>Agenda</h1>';
+echo '<ul>';
+foreach ($eventos as $evento) {
+    echo '<li>';
+    echo '<strong>' . $evento['nome'] . '</strong><br>';
+    echo $evento['hora'] . ' horas, ';
+    echo $evento['dia']->format('d/m/Y');
+    echo '</li>';
 }
-echo "</table>";
-
-// Cria o formulário para adicionar nomes
-echo "<form method='post' action = 'criacaodb.php'>";
-echo "<label>Data:</label><input type='date' name='data'><br>";
-echo "<label>Hora de Início:</label><input type='number' name='hora_inicio' min='0' max='23'><br>";
-echo "<label>Duração (em horas):</label><input type='number' name='duracao' min='1' max='8'><br>";
-echo "<label>Nome:</label><input type='text' name='nome'><br>";
-echo "<input type='submit' value='Adicionar'>";
-echo "</form>";
+echo '</ul>';
 
 ?>
