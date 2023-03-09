@@ -36,6 +36,19 @@ while ($row = $result->fetch_assoc()) {
     $data[$dia][$hora] = $nome;
 }
 
+// Adicionar os dias sem células preenchidas
+$inicio_mes = date('Y-m-01', strtotime('now'));
+$fim_mes = date('Y-m-t', strtotime('now'));
+
+$dia_atual = $inicio_mes;
+while ($dia_atual <= $fim_mes) {
+    $dia_atual_formatado = date('d-m-Y', strtotime($dia_atual));
+    if (!isset($data[$dia_atual_formatado])) {
+        $data[$dia_atual_formatado] = array_fill(0, 24, '');
+    }
+    $dia_atual = date('Y-m-d', strtotime($dia_atual . ' +1 day'));
+}
+
 // Criar a tabela HTML a partir dos dados organizados
 echo '<table>';
 echo '<thead>';
