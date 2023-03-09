@@ -17,32 +17,34 @@ $result = mysqli_query($conn, $sql);
 
 mysqli_close($conn);
 
-// Criar um array para armazenar os eventos da agenda
-$eventos = array();
-
-// Iterar sobre o resultado e criar objetos para os eventos
+// Organizar os dados em uma matriz bidimensional, com dias nas linhas e horas nas colunas
+$data = array();
 while ($row = $result->fetch_assoc()) {
-    $nome = $row['nome'];
+    $dia = date('Y-m-d', strtotime($row['dia']));
     $hora = $row['hora'];
-    $dia = new DateTime($row['dia']);
-    $evento = array(
-        'nome' => $nome,
-        'hora' => $hora,
-        'dia' => $dia
-    );
-    $eventos[] = $evento;
+    $nome = $row['nome'];
+    $data[$dia][$hora] = $nome;
 }
 
-// Exibir a agenda na página da web
-echo '<h1>Agenda</h1>';
-echo '<ul>';
-foreach ($eventos as $evento) {
-    echo '<li>';
-    echo '<strong>' . $evento['nome'] . '</strong><br>';
-    echo $evento['hora'] . ' horas, ';
-    echo $evento['dia']->format('d/m/Y');
-    echo '</li>';
+// Criar a tabela HTML a partir dos dados organizados
+echo '<table>';
+echo '<thead>';
+echo '<tr>';
+echo '<th></th>'; // Célula vazia no canto superior esquerdo
+for ($hora = 0; $hora < 24; $hora++) {
+    echo '<th>' . $hora . ':00</th>';
 }
-echo '</ul>';
-
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
+foreach ($data as $dia => $horas) {
+    echo '<tr>';
+    echo '<th>' . $dia . '</th>';
+    for ($hora = 0; $hora < 24; $hora++) {
+        echo '<td>' . (isset($horas[$hora]) ? $horas[$hora] : '') . '</td>';
+    }
+    echo '</tr>';
+}
+echo '</tbody>';
+echo '</table>';
 ?>
