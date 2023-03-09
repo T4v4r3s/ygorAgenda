@@ -8,16 +8,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hora_inicio = $_POST["hora_inicio"];
     $duracao = $_POST["duracao"];
     $nome = $_POST["nome"];
+    $diaConvertido =  date('Y-d-m',  strtotime($dia));
 
     $hora = $hora_inicio;
 
     
     for ($i = $hora_inicio; $i < $hora_inicio + $duracao; $i++) {
 
-        $validate_consulta = "SELECT * FROM wr1 WHERE dia LIKE $dia AND hora LIKE $hora";
+        $validate_consulta = "SELECT * FROM wr1 WHERE dia LIKE '$diaConvertido' AND hora LIKE $hora";
         $validade = mysqli_query($conn, $validate_consulta);
 
-        if (mysqli_num_rows($validade) == 0){
+        if (mysqli_num_rows($validade) != 0){
+
             header('Location: index.php');
             return;
         }
