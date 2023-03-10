@@ -4,7 +4,7 @@
 
 $servername = "localhost";
 $username = "debian-sys-maint";
-$password = "pn65woKdfwIXXbME";
+$password = "7b5TjLNFRsLPjrro";
 $dbname = "agendawrs";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
