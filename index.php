@@ -62,15 +62,19 @@ echo '</thead>';
 echo '<tbody>';
 ksort($data);
 foreach ($data as $dia => $horas) {
-    echo '<tr>';
-    echo '<th>' . $dia . '</th>';
-    for ($hora = 0; $hora < 24; $hora++) {
-        echo '<td>' . (isset($horas[$hora]) ? $horas[$hora] : '') . '</td>';
+    if (date('d-m-Y', strtotime(date('d-m-Y') . ' -7 day')) <= $dia && date('d-m-Y', strtotime(date('d-m-Y') . ' +14 day')) >= $dia)  {
+      echo '<tr>';
+      echo '<th>' . $dia . '</th>';
+      for ($hora = 0; $hora < 24; $hora++) {
+          echo '<td>' . (isset($horas[$hora]) ? $horas[$hora] : '') . '</td>';
+      }
+      echo '</tr>';
     }
-    echo '</tr>';
+    
 }
 echo '</tbody>';
 echo '</table>';
 echo '</body>';
 echo '</html>';
+
 ?>
