@@ -11,6 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $diaConvertido =  date('Y-m-d',  strtotime($dia));
 
     $hora = $hora_inicio;
+
+    if( date('Y-m-d') > $diaConvertido) {
+        header('Location: index.php');
+        return;
+    }
     
     for ($i = $hora_inicio; $i < $hora_inicio + $duracao; $i++) {
 

@@ -76,5 +76,4 @@ echo '</tbody>';
 echo '</table>';
 echo '</body>';
 echo '</html>';
-
 ?>
