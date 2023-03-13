@@ -21,14 +21,14 @@ if(empty($login) or empty($senha)){
 
 if(!empty($login) and !empty($senha)){
 
-    $sql = "SELECT login, senha, nome FROM usuarios WHERE login = '$login' AND senha = '$senha' ";
+    $sql = "SELECT login, senha, nome FROM login WHERE login = '$login' AND senha = '$senha' ";
     $result1 = mysqli_query($conn, $sql);
     
     if(mysqli_query($conn, $sql)){
 
         if(mysqli_num_rows($result1) > 0){
             
-            $sql = "SELECT * FROM usuarios WHERE cod_usuario = '$login' AND sen_usuario = '$senha' ";
+            $sql = "SELECT * FROM login WHERE cod_usuario = '$login' AND sen_usuario = '$senha' ";
             $result2 = mysqli_query($conn, $sql);
 
             if(mysqli_num_rows($result2) == 1){
