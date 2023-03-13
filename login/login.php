@@ -28,7 +28,7 @@ if(!empty($login) and !empty($senha)){
 
         if(mysqli_num_rows($result1) > 0){
             
-            $sql = "SELECT * FROM login WHERE cod_usuario = '$login' AND sen_usuario = '$senha' ";
+            $sql = "SELECT * FROM login WHERE login = '$login' AND senha = '$senha' ";
             $result2 = mysqli_query($conn, $sql);
 
             if(mysqli_num_rows($result2) == 1){
