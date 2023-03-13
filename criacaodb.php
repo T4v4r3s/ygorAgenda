@@ -16,37 +16,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: index.php');
         return;
     }
-    
-    for ($i = $hora_inicio; $i < $hora_inicio + $duracao; $i++) {
 
+    for ($i = $hora_inicio; $i < $hora_inicio + $duracao; $i++) {
+        // Verifica se já existe um nome cadastrado no horário escolhido
         $validate_consulta = "SELECT * FROM wr1 WHERE dia LIKE '$diaConvertido' AND hora = $hora";
         $result = mysqli_query($conn, $validate_consulta);
         $row = mysqli_fetch_assoc($result);
         if ($row != null){
-
             header('Location: index.php');
             return;
         }
+
         $hora ++;
+
     }
 
     $hora = $hora_inicio;
 
-
     for ($i = $hora_inicio; $i < $hora_inicio + $duracao; $i++) {
-
-        $sql = "INSERT INTO wr1 (dia, hora, nome) VALUES ('$dia', '$hora', '$nome')";
-            if (mysqli_query($conn, $sql)) {
-                echo "Nome adicionado com sucesso para $dia às $hora:00!<br>";
-            } else {
-                echo "Erro ao adicionar nome: " . mysqli_error($conn);
-            }
+        $sql = "INSERT INTO wr1 (dia, hora, nome) VALUES ('$diaConvertido', '$hora', '$nome')";
+        if (mysqli_query($conn, $sql)) {
+            echo "Nome adicionado com sucesso para $dia às $hora:00!<br>";
+        } else {
+            echo "Erro ao adicionar nome: " . mysqli_error($conn);
+        }
 
         $hora ++;
-        
+
+        // Caso tenha passado das 23h, atualiza a data
+        if ($hora >= 24) {
+            $hora = 0;
+            $diaConvertido = date('Y-m-d', strtotime($diaConvertido . ' +1 day'));
+        }
     }
 }
 
 header('Location: index.php');
-
 ?>

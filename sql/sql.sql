@@ -10,3 +10,14 @@ CREATE TABLE wr1(
     dia DATE NOT NULL
 ) ENGINE = INNODB;
 
+DROP TABLE IF EXISTS login;
+
+CREATE TABLE login (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    liberado ENUM('yes', 'no') NOT NULL DEFAULT 'no',
+    admin ENUM('yes', 'no') NOT NULL DEFAULT 'no',
+    PRIMARY KEY (id)
+) ENGINE = INNODB;
