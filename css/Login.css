@@ -1,0 +1,43 @@
+
+div.body-content{
+    /** Essa margem vai evitar que o conteudo fique por baixo do rodapé **/
+    margin-bottom: 100px;
+  }
+  
+  
+  footer{
+    width: 100%;
+    position: fixed;
+    bottom:0;
+    left:0;
+  }
+  
+  
+  
+  @media screen and (max-width: 767px) {
+    footer{
+      width: 100%;
+      position: relative;
+      bottom:0;
+      left:0;
+    }
+  }
+  
+  #Container{
+      background: rgba(255, 255, 255, 1);
+      padding-bottom: 25px;
+      padding-top: 25px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 4px rgba(0,0,0,0.35);
+      border: none;
+      width: 100%;
+      max-width: 450px;
+      /* padding: 15px; */
+      margin: auto;
+      width: 100vw;
+      
+  
+     
+      
+    }

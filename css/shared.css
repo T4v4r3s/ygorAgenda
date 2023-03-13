@@ -1,0 +1,32 @@
+html, * {
+    /** Não importa. Reseta os estilos **/
+    margin: 0;
+    padding: 0;
+  }
+
+  body{ min-height: 100vh; margin:0; }
+
+  header{ min-height:50px; }
+  footer{ min-height:50px;  }
+  
+  /* The article fills all the space between header & footer */
+  body{ display:flex; flex-direction:column; }
+  article{ flex:1; }
+
+
+#Container{
+  background: rgba(255, 255, 255, 1);
+  padding-bottom: 25px;
+  padding-top: 25px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.35);
+  border: none;
+}
+
+body{
+  background-image: url(../imgs/images.jpg);
+  background-repeat: no-repeat;
+  background-size: 1000%;
+  
+}

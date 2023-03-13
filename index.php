@@ -1,5 +1,14 @@
 <?php
 
+session_start();
+
+if($_SESSION['logado'] == true && $_SESSION != NULL){
+
+}else{
+  header('Location: login/index.php');
+  die();
+}
+
 include_once 'conexaodb.php';
 
 echo '<!DOCTYPE html>
@@ -7,7 +16,7 @@ echo '<!DOCTYPE html>
   <head>
     <meta charset="UTF-8">
     <title>Minha página</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>';
 
 echo '<body>';
